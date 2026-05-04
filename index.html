@@ -4,26 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Generator</title>
-    <link rel="stylesheet" href="src/styles.css" />
-
+    <link rel="stylesheet" href="src/style.css"/>
 </head>
-<body>
-    <h1>Welcome to my working page for an AI Generator</h1>
-    <h2>This is a work in progress</h2>
+
+  <body>
+    <div class="container">
+      <h1>Daily Momentum</h1>
+      <p class="subtitle">Small actions. Real progress.</p>
+
+      <form id="momentum-form">
+        <input
+          type="text"
+          id="user-input"
+          placeholder="What do you need today? (focus, energy, discipline...)"
+          required
+        />
+        <button type="submit">Generate my plan</button>
+      </form>
+
+      <div id="result">
+        <p class="placeholder">Your plan will appear here</p>
+      </div>
+    </div>
 
     <footer>
         <p>
           Project by
           <a href="https://github.com/rzmeridores" target="_blank">
-            Ranamae Meridores
-          </a>,
-          open-sourced on
+            Ranamae Meridores</a>, open-sourced on
           <a href="https://github.com/rzmeridores/daily-momentum-generator" target="_blank">
-            GitHub
-          </a>, and
-          <a href="https://rm-daily-momentum-generator.netlify.app/" target="_blank">
-            hosted on Netlify
-          </a>.
+            GitHub 
+          </a>and
+          <a href="https://app.netlify.com/teams/rzmeridores/projects" target="_blank">
+            hosted on Netlify</a>.
         </p>
       </footer>
 
