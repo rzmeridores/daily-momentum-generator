@@ -1,31 +1,41 @@
 let form = document.querySelector("#momentum-form");
 let result = document.querySelector("#result");
 
-function handleSubmit(event) {
+function displayPlan(response) {
+    console.log(response); 
+    result.innerHTML = response.data.answer;
+  }
+
+function generatePlan(event) {
   event.preventDefault();
 
-  let input = document.querySelector("#user-input").value;
+  let userInput = document.querySelector("#user-input").value;
 
-  // Simulate loading (important for next phase)
   result.innerHTML = `<div class="loading">Generating your plan...</div>`;
 
-  setTimeout(function () {
-    result.innerHTML = `
-      <div class="plan-title">Today’s Momentum Plan</div>
+  let apiKey = "cfdd8988391fb88a399ddd7ecod46tf0";
 
-      <div class="plan-section">
-        <strong>Body:</strong> Do a 20-minute light workout or walk
-      </div>
+  let prompt = `Create a "Daily Momentum Plan" for someone who wants more ${userInput} today.
+A Daily Momentum Plan is a short, structured plan that helps someone make progress in one day.
+Include exactly:
+- Body: one simple physical action (under 30 minutes, beginner-friendly)
+- Work: one focused, high-impact task
+- Mindset: one short reminder to stay consistent
+Rules:
+- Keep it practical and specific
+- No vague advice or motivational fluff
+- Maximum 60 words total
+- Format clearly with headings: Body, Work, Mindset`;
+  let context ="You are a practical coach who helps people build momentum through small, realistic daily actions. Avoid vague motivational advice.";
 
-      <div class="plan-section">
-        <strong>Work:</strong> Focus on one important task related to "${input}"
-      </div>
+  let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
 
-      <div class="plan-section">
-        <strong>Mindset:</strong> Keep it simple and follow through
-      </div>
-    `;
-  }, 1500);
+  axios.get(apiUrl).then(displayPlan);
 }
 
-form.addEventListener("submit", handleSubmit);
+form.addEventListener("submit", generatePlan);
+
+axios.get(apiUrl).then(displayPlan).catch(function (error) {
+    console.log(error);
+    result.innerHTML = "Sorry, something went wrong. Please try again.";
+  });
